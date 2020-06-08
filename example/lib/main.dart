@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutterqfsilentinstall/flutterqfsilentinstall.dart';
+import 'package:flutterqfsilentinstall/flutter_qf_silent_install.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await Flutterqfsilentinstall.platformVersion;
+      platformVersion = await FlutterQfSilentInstall.platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

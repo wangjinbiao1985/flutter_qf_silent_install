@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutterqfsilentinstall/flutterqfsilentinstall.dart';
+import 'package:flutterqfsilentinstall/flutter_qf_silent_install.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutterqfsilentinstall');
+  const MethodChannel channel = MethodChannel('silentinstall');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Flutterqfsilentinstall.platformVersion, '42');
+    expect(await FlutterQfSilentInstall.platformVersion, '42');
   });
 }
