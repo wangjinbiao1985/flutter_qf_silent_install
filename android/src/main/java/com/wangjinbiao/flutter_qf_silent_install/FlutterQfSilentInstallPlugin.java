@@ -1,5 +1,6 @@
-package com.wangjinbiao.flutterqfsilentinstall;
+package com.wangjinbiao.flutter_qf_silent_install;
 
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,10 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       case "getPlatformVersion":
         result.success("Android " + android.os.Build.VERSION.RELEASE);
         break;
+//      case "resetMobile":
+//        Intent intent  = new Intent();
+//        intent.setAction("android.intent.action.RESET_MOBILE");
+//        sendBroadcast(intent);
       default:
         result.notImplemented();
         break;
