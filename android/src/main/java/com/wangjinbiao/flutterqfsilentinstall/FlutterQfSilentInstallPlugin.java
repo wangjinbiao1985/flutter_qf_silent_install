@@ -39,7 +39,9 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
     switch(call.method) {
       case "install":
         String path = call.argument("path");
-        result.success(install(path));
+        boolean bInstall = install(path);
+        Log.d("TAG","2222222222222222");
+        result.success(bInstall);
         break;
       case "getPlatformVersion":
         result.success("Android " + android.os.Build.VERSION.RELEASE);
