@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutterqfsilentinstall/flutter_qf_silent_install.dart';
+import 'package:flutter_qf_silent_install/flutter_qf_silent_install.dart';
+
 
 void main() {
   const MethodChannel channel = MethodChannel('silentinstall');
