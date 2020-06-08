@@ -24,12 +24,12 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutterqfsilentinstall");
+    channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "silent_install");
     channel.setMethodCallHandler(this);
   }
 
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterqfsilentinstall");
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "silent_install");
     channel.setMethodCallHandler(new FlutterQfSilentInstallPlugin());
   }
 
