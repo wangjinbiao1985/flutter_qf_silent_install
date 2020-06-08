@@ -1,4 +1,4 @@
-package com.wangjinbiao.flutter_qf_silent_install;
+package com.wangjinbiao.flutterqfsilentinstall;
 
 import android.content.Intent;
 import android.util.Log;

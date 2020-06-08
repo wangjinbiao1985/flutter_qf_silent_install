@@ -1,4 +1,4 @@
-group 'com.wangjinbiao.flutter_qf_silent_install'
+group 'com.wangjinbiao.flutterqfsilentinstall'
 version '1.0'
 
 buildscript {
