@@ -40,7 +40,6 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       case "install":
         String path = call.argument("path");
         boolean bInstall = install(path);
-        Log.d("TAG","2222222222222222");
         result.success(bInstall);
         break;
       case "getPlatformVersion":
@@ -81,7 +80,19 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       dataOutputStream.flush();
       dataOutputStream.writeBytes("exit\n");
       dataOutputStream.flush();
-      process.waitFor();
+      int nWaitFor = process.waitFor();
+      boolean bWaitFor = returnResult(nWaitFor);
+      if (bWaitFor) {
+        result = true;
+        if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
+          Log.d("TAG","静默安装后启动APP成功");
+        }else{
+          Log.e("TAG","静默安装后启动APP失败！！！");
+          //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
+        }
+      } else {
+        result = false;
+      }
       errorStream = new BufferedReader(new InputStreamReader(process.getErrorStream()));
       String msg = "";
       String line;
@@ -93,12 +104,7 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       // 如果执行结果中包含Failure字样就认为是安装失败，否则就认为安装成功
       if (!msg.contains("Failure")) {
         result = true;
-        if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
-          Log.d("TAG","静默安装后启动APP成功");
-      }else{
-          Log.e("TAG","静默安装后启动APP失败！！！");
-          //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
-      }
+
       }
     } catch(Exception e) {
       Log.e("TAG", e.getMessage(),e);
