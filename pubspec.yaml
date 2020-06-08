@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.wangjinbiao.flutter_qf_silent_install
+        package: com.wangjinbiao.flutterqfsilentinstall
         pluginClass: FlutterQfSilentInstallPlugin
       ios:
         pluginClass: FlutterQfSilentInstallPlugin

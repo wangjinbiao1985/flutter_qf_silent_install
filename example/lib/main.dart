@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutterqfsilentinstall/flutter_qf_silent_install.dart';
+import 'package:flutterqfsilentinstall/flutterqfsilentinstall.dart';
 
 void main() {
   runApp(MyApp());
