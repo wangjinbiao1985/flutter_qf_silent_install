@@ -91,6 +91,12 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       // 如果执行结果中包含Failure字样就认为是安装失败，否则就认为安装成功
       if (!msg.contains("Failure")) {
         result = true;
+        if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
+          Log.d("TAG","静默安装后启动APP成功");
+      }else{
+          Log.e("TAG","静默安装后启动APP失败！！！");
+          //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
+      }
       }
     } catch(Exception e) {
       Log.e("TAG", e.getMessage(),e);
@@ -108,5 +114,37 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
     }
 
     return result;
+  }
+
+  public static boolean rootStartApk(String packageName,String activityName){
+    boolean isSuccess = false;
+    String cmd = "am start -n " + packageName + "/" + activityName + " \n";
+    Process process = null;
+    try {
+        process = Runtime.getRuntime().exec(cmd);
+        int value = process.waitFor();
+        return returnResult(value);
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally{
+        if(process!=null){
+            process.destroy();
+        }
+    }
+    return isSuccess;
+}
+
+  /**
+   * root下执行cmd的返回值
+   * */
+  private static boolean returnResult(int value){
+    // 代表成功
+    if (value == 0) {
+      return true;
+    } else if (value == 1) { // 失败
+      return false;
+    } else { // 未知情况
+      return false;
+    }
   }
 }
