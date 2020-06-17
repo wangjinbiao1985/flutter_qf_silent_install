@@ -25,7 +25,7 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
   private SuCommand suCommand;
   private final String TAG = getClass().getSimpleName();
   LogUtil logUtil = new LogUtil(FlutterQfSilentInstallPlugin.class, true);
-
+  private UpdateStartBoardcaseReceiver updateStartBoardcaseReceiver;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -64,18 +64,19 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
   public void installSilent(String apkPath) {
     final String cmd = "pm install -r " + apkPath;
     suCommand = new SuCommand();
+    updateStartBoardcaseReceiver = new UpdateStartBoardcaseReceiver();
     new Thread(new Runnable() {
       @Override
       public void run() {
         int ret = suCommand.execRootCmdSilent(cmd);
         if (ret == 0) {
           logUtil.d("静默安装成功！！！");
-          if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
-            logUtil.d("静默安装后启动APP成功");
-          }else{
-            logUtil.e("静默安装后启动APP失败！！！");
-            //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
-          }
+//          if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
+//            logUtil.d("静默安装后启动APP成功");
+//          }else{
+//            logUtil.e("静默安装后启动APP失败！！！");
+//            //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
+//          }
         } else {
           logUtil.e("静默安装失败！！！");
         }
