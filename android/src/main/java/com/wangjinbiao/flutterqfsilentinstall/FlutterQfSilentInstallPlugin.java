@@ -24,6 +24,7 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
   private MethodChannel channel;
   private SuCommand suCommand;
   private final String TAG = getClass().getSimpleName();
+  LogUtil logUtil = new LogUtil(FlutterQfSilentInstallPlugin.class, true);
 
 
   @Override
@@ -68,14 +69,15 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       public void run() {
         int ret = suCommand.execRootCmdSilent(cmd);
         if (ret == 0) {
+          logUtil.d("静默安装成功！！！");
           if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
-            Log.d(TAG,"静默安装后启动APP成功");
+            logUtil.d("静默安装后启动APP成功");
           }else{
-            Log.e(TAG,"静默安装后启动APP失败！！！");
+            logUtil.e("静默安装后启动APP失败！！！");
             //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
           }
         } else {
-          Log.e(TAG,"静默安装失败！！！");
+          logUtil.e("静默安装失败！！！");
         }
       }
     }).start();
