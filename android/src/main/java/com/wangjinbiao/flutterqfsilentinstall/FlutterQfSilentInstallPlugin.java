@@ -43,7 +43,8 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       case "install":
         String path = call.argument("path");
         //boolean bInstall = install(path);
-        result.success(installSilent(path));
+        //result.success(installSilent(path));
+        installSilent(path);
         break;
       case "getPlatformVersion":
         result.success("Android " + android.os.Build.VERSION.RELEASE);
@@ -59,7 +60,7 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
     channel.setMethodCallHandler(null);
   }
 
-  public int installSilent(String apkPath) {
+  public void installSilent(String apkPath) {
     final String cmd = "pm install -r " + apkPath;
     suCommand = new SuCommand();
     new Thread(new Runnable() {
@@ -78,7 +79,6 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
         }
       }
     }).start();
-    return 0;
   }
 
   /**

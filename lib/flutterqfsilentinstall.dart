@@ -11,7 +11,10 @@ class FlutterQfSilentInstall {
     return version;
   }
 
-  static Future<bool> install(String path) async{
-    return await _channel.invokeMethod('install', {'path': path});
+//  static Future<bool> install(String path) async{
+//    return await _channel.invokeMethod('install', {'path': path});
+//  }
+  static Future<void> install(String path) async{
+     await _channel.invokeMethod('install', {'path': path});
   }
 }
