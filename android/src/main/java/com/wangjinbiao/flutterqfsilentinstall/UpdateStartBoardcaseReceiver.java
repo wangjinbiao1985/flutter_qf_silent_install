@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.util.Printer;
+import android.widget.Toast;
 
 import static com.wangjinbiao.flutterqfsilentinstall.FlutterQfSilentInstallPlugin.rootStartApk;
 
@@ -19,9 +20,12 @@ public class UpdateStartBoardcaseReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String packageName = intent.getData().getSchemeSpecificPart();
 
+
         logUtil.d(packageName+">-<"+context.getPackageName());
+        Toast.makeText(context, packageName+">-<"+context.getPackageName(), Toast.LENGTH_SHORT).show();
         if(intent.getAction().equals(Action)  && packageName.equals(/*context.getPackageName()*/"com.wangjinbiao.batterytest")){ //广播和包名确认
-//            Intent activity = new Intent(context,MainActivity.class);
+            Toast.makeText(context, "哇，重新安装了", Toast.LENGTH_SHORT).show();
+            //            Intent activity = new Intent(context,MainActivity.class);
 //            activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            context.startActivity(activity);
                       if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
