@@ -45,10 +45,6 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
       case "getPlatformVersion":
         result.success("Android " + android.os.Build.VERSION.RELEASE);
         break;
-//      case "resetMobile":
-//        Intent intent  = new Intent();
-//        intent.setAction("android.intent.action.RESET_MOBILE");
-//        sendBroadcast(intent);
       default:
         result.notImplemented();
         break;
