@@ -22,6 +22,9 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHandler {
 
   private MethodChannel channel;
+  private SuCommand suCommand;
+  private final String TAG = getClass().getSimpleName();
+
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -39,8 +42,8 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
     switch(call.method) {
       case "install":
         String path = call.argument("path");
-        boolean bInstall = install(path);
-        result.success(bInstall);
+        //boolean bInstall = install(path);
+        result.success(installSilent(path));
         break;
       case "getPlatformVersion":
         result.success("Android " + android.os.Build.VERSION.RELEASE);
@@ -54,6 +57,28 @@ public class FlutterQfSilentInstallPlugin implements FlutterPlugin, MethodCallHa
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     channel.setMethodCallHandler(null);
+  }
+
+  public int installSilent(String apkPath) {
+    final String cmd = "pm install -r " + apkPath;
+    suCommand = new SuCommand();
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        int ret = suCommand.execRootCmdSilent(cmd);
+        if (ret == 0) {
+          if(rootStartApk("com.wangjinbiao.batterytest", "MainActivity")){
+            Log.d(TAG,"静默安装后启动APP成功");
+          }else{
+            Log.e(TAG,"静默安装后启动APP失败！！！");
+            //Toast.makeText(this,"静默安装后启动APP失败！！！",Toast.LENGTH_SHORT).show();
+          }
+        } else {
+          Log.e(TAG,"静默安装失败！！！");
+        }
+      }
+    }).start();
+    return 0;
   }
 
   /**
