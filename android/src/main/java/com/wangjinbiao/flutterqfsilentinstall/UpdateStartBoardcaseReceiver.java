@@ -16,7 +16,7 @@ public class UpdateStartBoardcaseReceiver extends BroadcastReceiver {
         String packageName = intent.getData().getSchemeSpecificPart();
         Log.w("replacePackage",packageName+">-<"+context.getPackageName());
         if(intent.getAction().equals(Action)  && packageName.equals(context.getPackageName())){ //广播和包名确认
-            Intent activity = new Intent(context,FlutterQfSilentInstallPlugin.class);
+            Intent activity = new Intent(context,MainActivity.class);
             activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(activity);
         }
